@@ -1,8 +1,5 @@
 # Группа: ЭФБО-02-22 
 # Мудрицын Михаил Евгеньевич
 
-
-![alt text](image.png)
-
-![alt text](image-1.png)
-
+![alt text](photo_2024-09-10_14-00-50.jpg) 
+![alt text](photo_2024-09-10_14-00-53.jpg)
