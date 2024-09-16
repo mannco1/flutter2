@@ -1,92 +1,122 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LoginScreen(),
+      home: LoginPage(),
     );
   }
 }
 
-class LoginScreen extends StatefulWidget {
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
+
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  // ignore: library_private_types_in_public_api
+  _LoginPageState createState() => _LoginPageState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
-  bool _rememberMe = false; // Состояние для флажка "Запомнить меня"
+class _LoginPageState extends State<LoginPage> {
+  bool _isRememberMeChecked = false;
+
+  void _toggleRememberMe(bool? value) {
+    setState(() {
+      _isRememberMeChecked = value ?? false;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          padding: EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              SizedBox(height: 100),
-              Text(
-                'Авторизация',
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+      appBar: AppBar(
+        title: const Text('Авторизация'),
+        centerTitle: true,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            const TextField(
+              decoration: InputDecoration(
+                labelText: 'Логин',
+                border: OutlineInputBorder(),
+                filled: true,
+                fillColor: Colors.white,
               ),
-              SizedBox(height: 40),
-              TextField(
-                decoration: InputDecoration(
-                  labelText: 'Логин',
-                  border: OutlineInputBorder(),
+            ),
+            const SizedBox(height: 16.0),
+            const TextField(
+              obscureText: true,
+              decoration: InputDecoration(
+                labelText: 'Пароль',
+                border: OutlineInputBorder(),
+                filled: true,
+                fillColor: Colors.white,
+              ),
+            ),
+            const SizedBox(height: 16.0),
+            Row(
+              children: <Widget>[
+                Checkbox(
+                  value: _isRememberMeChecked,
+                  onChanged: _toggleRememberMe,
                 ),
-              ),
-              SizedBox(height: 16),
-              TextField(
-                obscureText: true,
-                decoration: InputDecoration(
-                  labelText: 'Пароль',
-                  border: OutlineInputBorder(),
-                ),
-              ),
-              SizedBox(height: 16),
-              Row(
-                children: <Widget>[
-                  Checkbox(
-                    value: _rememberMe,
-                    onChanged: (bool? value) {
-                      setState(() {
-                        _rememberMe = value ?? false;
-                      });
-                    },
-                  ),
-                  Text('Запомнить меня'),
-                ],
-              ),
-              SizedBox(height: 16),
-              ElevatedButton(
-                onPressed: () {
-                  // Действие при нажатии кнопки "Войти"
-                  print('Remember me: $_rememberMe'); // Проверить состояние
-                },
-                child: Text('Войти'),
+                const Text('Запомнить меня'),
+              ],
+            ),
+            const SizedBox(height: 16.0),
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: () {},
                 style: ElevatedButton.styleFrom(
-                  minimumSize: Size(double.infinity, 50),
+                  backgroundColor: Colors.blue,
+                  minimumSize: const Size(double.infinity, 50),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                ),
+                child: const Text(
+                  'Войти',
+                  style: TextStyle(color: Colors.white),
                 ),
               ),
-              SizedBox(height: 16),
-              TextButton(
+            ),
+            const SizedBox(height: 16.0),
+            SizedBox(
+              width: double.infinity,
+              child: TextButton(
                 onPressed: () {},
-                child: Text('Регистрация'),
+                style: TextButton.styleFrom(
+                  minimumSize: const Size(double.infinity, 50),
+                  side: const BorderSide(color: Colors.blue),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                ),
+                child: const Text(
+                  'Регистрация',
+                  style: TextStyle(color: Colors.blue),
+                ),
               ),
-              TextButton(
-                onPressed: () {},
-                child: Text('Восстановить пароль'),
+            ),
+            TextButton(
+              onPressed: () {},
+              child: const Text(
+                'Восстановить пароль',
+                style: TextStyle(color: Colors.grey),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
